@@ -7,9 +7,21 @@ from sklearn.cluster import KMeans
 # TODO: This downloads some resources the first time it runs ...
 #nltk.download('punkt')
 
+# define set of stopwords
+
+stopwords= {"title", "fee", "fees", "buyer", "seller", "for", "january", "februrary",
+            "march", "mai", "june", "july", "august", "september", "october",
+            "november", "december" }
+
 def tokenize(line):
-    # TODO:stemming, stop word
-    return nltk.word_tokenize(line)
+    tokens = []
+    for token in nltk.word_tokenize(line):
+        if token.lower() in stopwords:
+            continue
+        tokens.append(token)
+
+    return tokens
+
 
 def main():
     with open('raw_fee_fields.txt', 'r', encoding="utf-8") as code_file:
@@ -27,7 +39,7 @@ def main():
 
     with open('fields_clustered.txt', 'w') as fields_clustered_file:
         for i in range(len(fields)):
-            fields_clustered_file.write(fields[i] + '\t' + str(clusters[i]) + '\n')
+            fields_clustered_file.write(str(clusters[i]) + '\t' + fields[i] + '\n')
 
 if __name__ == '__main__':
     main()
