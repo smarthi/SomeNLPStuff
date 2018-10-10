@@ -9,16 +9,15 @@ from sklearn.cluster import KMeans
 
 # define set of stopwords
 
-stopwords= {"title", "fee", "fees", "buyer", "seller", "for", "january", "februrary",
-            "march", "mai", "june", "july", "august", "september", "october",
+stopwords= {"title", "fee", "fees", "buyer", "seller", "for", "january", "february",
+            "march", "may", "april", "june", "july", "august", "september", "october",
             "november", "december" }
 
 def tokenize(line):
     tokens = []
     for token in nltk.word_tokenize(line):
-        if token.lower() in stopwords:
-            continue
-        tokens.append(token)
+        if not token.lower() in stopwords:
+            tokens.append(token)
 
     return tokens
 
