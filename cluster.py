@@ -3,6 +3,7 @@
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
+import re
 
 # TODO: This downloads some resources the first time it runs ...
 #nltk.download('punkt')
@@ -13,12 +14,13 @@ stopwords= {"title", "fee", "fees", "buyer", "seller", "for", "january", "februa
             "march", "may", "april", "june", "july", "august", "september", "october",
             "november", "december" }
 
+reg = ''
 def tokenize(line):
     tokens = []
     for token in nltk.word_tokenize(line):
         if not token.lower() in stopwords:
-            tokens.append(token)
-
+            if len((re.sub("[^a-zA-Z ]", "", token.lower())).strip()) != 0:
+                tokens.append(token)
     return tokens
 
 
