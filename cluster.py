@@ -18,9 +18,8 @@ reg = ''
 def tokenize(line):
     tokens = []
     for token in nltk.word_tokenize(line):
-        if not token.lower() in stopwords:
-            if len((re.sub("[^a-zA-Z ]", "", token.lower())).strip()) != 0:
-                tokens.append(token)
+        if not token.lower() in stopwords and len((re.sub("[^a-zA-Z ]", "", token.lower())).strip()) != 0:
+            tokens.append(token)
     return tokens
 
 
