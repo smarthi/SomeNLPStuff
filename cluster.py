@@ -30,7 +30,7 @@ def main():
 
     doc_matrix = vectorizer.fit_transform(fields)
 
-    kmeans = KMeans(n_clusters=100)
+    kmeans = KMeans(init='k-means++', n_clusters=50, n_init=10)
 
     kmeans.fit(doc_matrix)
 
