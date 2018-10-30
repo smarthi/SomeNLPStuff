@@ -67,7 +67,7 @@ def main():
             d[i] = list([class_fields[i]])
 
     with open('fields_clustered.txt', 'w') as fields_clustered_file:
-        for i in range(len(fields)):
+        for i in range(len(fields[:-144])):
             label = "outlier"
             if clusters[i] in d.keys():
                 labels = d.get(clusters[i])
