@@ -740,7 +740,7 @@ $98.13/dy from 6/22 to COE
 1099 Processing Fee to Granite Escrow
 1099 Reporting
 1099 Reporting Fee
-1099ProcessingFee
+1099 Processing Fee
 10k program
 10K Program
 10-YR BUILDER WARRANTY

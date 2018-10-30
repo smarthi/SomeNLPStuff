@@ -23,7 +23,7 @@ synonym_dict = {
    "docs" : "document",
    "documentation" : "document",
    "trans" : "transaction",
-   "cert" : "certificate",
+   "cert" : "certification",
    "amend" : "amendment",
    "hoa" : "homeowners association"
 }
@@ -54,8 +54,7 @@ def main():
     with open('raw_fee_fields.txt', 'r', encoding="utf-8") as code_file:
         fields = code_file.read().splitlines()
 
-    vectorizer = TfidfVectorizer(use_idf=False, tokenizer=tokenize, norm="l2",  analyzer='word', sublinear_tf=True,
-                                 ngram_range=(1,3))
+    vectorizer = TfidfVectorizer(use_idf=False, tokenizer=tokenize, norm="l2",  analyzer='word', sublinear_tf=True)
 
     doc_matrix = vectorizer.fit_transform(fields)
 
@@ -75,13 +74,13 @@ def main():
 
     with open('fields_clustered.txt', 'w') as fields_clustered_file:
         for i in range(len(fields[:-144])):
-            label = "outlier"
+            label = "other"
             if clusters[i] in d.keys():
                 labels = d.get(clusters[i])
                 if (len(labels)) > 0:
                     label = labels[0]
 
-            fields_clustered_file.write(str(clusters[i]) + '\t' + fields[i] + '\t' + label + '\n' )
+            fields_clustered_file.write(fields[i] + '\t' + str(clusters[i]) + '\t' + label + '\n' )
 
 if __name__ == '__main__':
     main()
