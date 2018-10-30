@@ -48,7 +48,7 @@ def main():
     with open('raw_fee_fields.txt', 'r', encoding="utf-8") as code_file:
         fields = code_file.read().splitlines()
 
-    vectorizer = TfidfVectorizer(use_idf=True, tokenizer=tokenize, norm="l2", ngram_range=(1,3))
+    vectorizer = TfidfVectorizer(use_idf=True, tokenizer=tokenize, norm="l2", ngram_range=(1,3), analyzer='word')
 
     doc_matrix = vectorizer.fit_transform(fields)
 
@@ -64,11 +64,17 @@ def main():
         if i in d.keys():
             d.get(i).append(class_fields[i])
         else:
-            d[i] = list(class_fields[i])
+            d[i] = list([class_fields[i]])
 
     with open('fields_clustered.txt', 'w') as fields_clustered_file:
         for i in range(len(fields)):
-            fields_clustered_file.write(str(clusters[i]) + '\t' + fields[i] + '\n' )
+            label = "outlier"
+            if clusters[i] in d.keys():
+                labels = d.get(clusters[i])
+                if (len(labels)) > 0:
+                    label = labels[0]
+
+            fields_clustered_file.write(str(clusters[i]) + '\t' + fields[i] + '\t' + label + '\n' )
 
 if __name__ == '__main__':
     main()
