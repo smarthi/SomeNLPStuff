@@ -11,7 +11,7 @@ from nltk.stem.snowball import SnowballStemmer
 
 # define set of stopwords
 
-stopwords= {"title", "fee", "fees", "buyer", "seller", "for", "january", "february",
+stopwords= {"fee", "fees", "buyer", "seller", "for", "january", "february",
             "march", "may", "april", "june", "july", "august", "september", "october",
             "november", "december", "$", "jan", " feb", "mar", "apr", "jun", "jul", "aug",
             "sep", "oct", "nov", "dec" , "of", "to", "and", "in", "if"}
@@ -25,7 +25,8 @@ synonym_dict = {
    "trans" : "transaction",
    "cert" : "certification",
    "amend" : "amendment",
-   "hoa" : "homeowners association"
+   "hoa" : "homeowners association",
+   "condo": "condominium"
 }
 
 stemmer = SnowballStemmer("english")
